@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DNA &amp; RNA Sequence Analyzer — CSC 442</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <span class="logo">🧬</span>
+    <div>
+      <h1>DNA &amp; RNA Sequence Analyzer</h1>
+      <p class="subtitle">CSC 442 — Computational Biology &amp; Interdisciplinary Studies · 2024/2025</p>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- ── INPUT CARD ─────────────────────────────────────────────────────── -->
+  <div class="card" id="inputCard">
+    <h2>📥 Step 1 — Enter Your Sequence</h2>
+    <p class="hint">Paste a sequence, upload a file (.txt / .fasta), or drag &amp; drop a file below.</p>
+
+    <!-- Drag & drop / upload zone -->
+    <div class="drop-zone" id="dropZone">
+      <span class="drop-icon">📂</span>
+      <p>Drag &amp; drop a .txt or .fasta file here</p>
+      <p class="drop-hint">— or —</p>
+      <label class="btn btn-outline-dark" for="fileInput">Browse file</label>
+      <input type="file" id="fileInput" accept=".txt,.fasta,.fa" style="display:none"/>
+      <p id="fileName" class="file-name"></p>
+    </div>
+
+    <!-- Text area -->
+    <textarea id="sequenceInput" rows="5"
+      placeholder="Or type / paste your sequence here, e.g.  ATGCGATCGATCG  or  AUGCGAUCGAUCG"></textarea>
+
+    <!-- Strand type (shown only for DNA) -->
+    <div class="form-group" id="strandGroup" style="display:none;">
+      <label>🔀 DNA Strand Type</label>
+      <div class="radio-group">
+        <label class="radio-label">
+          <input type="radio" name="strand" value="non-template" checked/>
+          <span><strong>Non-template strand</strong> (coding / sense strand)</span>
+        </label>
+        <label class="radio-label">
+          <input type="radio" name="strand" value="template"/>
+          <span><strong>Template strand</strong> (antisense strand)</span>
+        </label>
+      </div>
+      <p class="radio-hint">The non-template strand has the same sequence as the mRNA (with T instead of U). The template strand is read by RNA polymerase to produce mRNA.</p>
+    </div>
+
+    <div id="inputError" class="error-box" style="display:none;"></div>
+
+    <button class="btn btn-primary btn-lg" id="analyzeBtn" onclick="analyze()">
+      🔬 Analyze Sequence
+    </button>
+  </div>
+
+  <!-- ── RESULTS ──────────────────────────────────────────────────────────── -->
+  <div id="results" style="display:none;">
+
+    <!-- 1. Detection -->
+    <div class="card result-card" id="cardDetection">
+      <div class="step-badge">Step 1</div>
+      <h2>🔍 Sequence Detection</h2>
+      <div id="detectionResult"></div>
+    </div>
+
+    <!-- 2. Transcription -->
+    <div class="card result-card" id="cardTranscription" style="display:none;">
+      <div class="step-badge">Step 2</div>
+      <h2>🔄 Transcription</h2>
+      <div id="transcriptionResult"></div>
+    </div>
+
+    <!-- 3. Translation -->
+    <div class="card result-card" id="cardTranslation" style="display:none;">
+      <div class="step-badge">Step 3</div>
+      <h2>🔡 Translation — Codons</h2>
+      <div id="translationResult"></div>
+    </div>
+
+    <!-- 4. Amino Acids -->
+    <div class="card result-card" id="cardAmino" style="display:none;">
+      <div class="step-badge">Step 4</div>
+      <h2>🧪 Amino Acids &amp; Polypeptide Chain</h2>
+      <div id="aminoResult"></div>
+    </div>
+
+    <!-- 5. Protein -->
+    <div class="card result-card" id="cardProtein" style="display:none;">
+      <div class="step-badge">Step 5</div>
+      <h2>🧬 Protein &amp; Database Lookup</h2>
+      <div id="proteinResult"></div>
+    </div>
+
+  </div>
+
+  <!-- Loading overlay -->
+  <div id="loadingOverlay" style="display:none;">
+    <div class="loader-box">
+      <div class="spinner"></div>
+      <p id="loadingMsg">Analyzing sequence…</p>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <p>CSC 442 · Department of Computer Science · Faculty of Physical Sciences · 2024/2025</p>
+</footer>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
