@@ -1,4 +1,4 @@
 Name: LAMBERT BIMWARIT RHEMA
 Matric number: 22CG031880
-Live URL of hosted application: https://assignment-lac-alpha-81.vercel.app/
-GitHub repository link: https://github.com/Rhema-01/CSC331_CSC415_Project2_LLM_QA.git
+Live URL of hosted application: https://dna-project-lambert-22cg031880.onrender.com/
+GitHub repository link: https://github.com/Rhema-01/DNA_Project_Lambert_22CG031880.git
